@@ -1,6 +1,9 @@
 import { bundle } from '@apidevtools/json-schema-ref-parser';
 import type { ParserOptions } from '@apidevtools/json-schema-ref-parser/dist/lib/options';
-import type { JSONSchema, ResolverOptions } from '@apidevtools/json-schema-ref-parser/dist/lib/types';
+import type {
+  JSONSchema,
+  ResolverOptions,
+} from '@apidevtools/json-schema-ref-parser/dist/lib/types';
 import type { JSONSchema7 } from 'json-schema';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
@@ -62,7 +65,9 @@ async function bundleSchemaFiles(
   const bundledSchemas: JSONSchema[] = [];
   for (const jsonSchemaPath of schemaPaths) {
     console.info(`${jsonSchemaPath} - 🎬`);
-    const jsonSchema = (await import(`./${jsonSchemaPath}`)) as JSONSchema7;
+    const jsonSchema = JSON.parse(
+      await readFile(join(__dirname, jsonSchemaPath), 'utf-8')
+    ) as JSONSchema7;
     // TODO: replace $defs.$ref with local in internals with those from tmpdir
     if (replaceInternalsRefs) {
       Object.keys(jsonSchema.$defs ?? []).forEach((key) => {
@@ -87,7 +92,6 @@ async function bundleSchemaFiles(
       parser: 'json',
     });
     await writeFile(join(libPath, jsonSchemaPath), prettifiedSchema);
-    // required to use ajv with async keywords
     bundledSchemas.push(bundledSchema);
     console.info(`${jsonSchemaPath} - ✔️`);
   }
