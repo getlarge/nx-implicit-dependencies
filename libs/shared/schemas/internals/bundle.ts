@@ -85,8 +85,8 @@ async function bundleSchemaFiles(
     }
 
     const stringifiedSchema = JSON.stringify(bundledSchema, null, 2);
-    // decoding of some refs is made to avoid  https://github.com/APIDevTools/json-schema-ref-parser/issues/262
     const prettierConfig = (await resolveConfig(process.cwd())) ?? {};
+    // decoding of some refs is made to avoid  https://github.com/APIDevTools/json-schema-ref-parser/issues/262
     const prettifiedSchema = format(stringifiedSchema.replaceAll(/%24/g, '$'), {
       ...prettierConfig,
       parser: 'json',
