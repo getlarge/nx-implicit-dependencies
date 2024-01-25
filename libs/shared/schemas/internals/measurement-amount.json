@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeasurementAmount",
+  "type": "number",
+  "description": "The amount of the measurement, 10 digits in total, maximum of 3 digits after decimal point",
+  "multipleOf": 0.001,
+  "maximum": 9999999999
+}

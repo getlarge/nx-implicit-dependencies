@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeasurementRange",
+  "$comment": "Being able to use unit as a generic would be really nice... https://json-schema.org/blog/posts/dynamicref-and-generics",
+  "type": "object",
+  "properties": {
+    "min": {
+      "$ref": "#/$defs/Amount"
+    },
+    "max": {
+      "$ref": "#/$defs/Amount"
+    }
+  },
+  "additionalProperties": true,
+  "required": ["min", "max"],
+  "$defs": {
+    "Amount": {
+      "$ref": "libs/shared/schemas/internals/measurement-amount.json"
+    }
+  },
+  "examples": [
+    {
+      "min": 50,
+      "max": 100
+    },
+    {
+      "min": -10,
+      "max": 20
+    }
+  ]
+}

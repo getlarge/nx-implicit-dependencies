@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchPartial",
+  "description": "A batch of coffee is a collection of coffee varieties that are processed together.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The batch ID.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "The batch name."
+    },
+    "facility": {
+      "description": "organisation or person that is responsible for the processing of the batch",
+      "$ref": "#/$defs/Contact"
+    },
+    "processing": {
+      "$ref": "#/$defs/Processing"
+    },
+    "varieties": {
+      "title": "Varieties",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Variety"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["id", "facility", "processing", "varieties"],
+  "$defs": {
+    "Contact": {
+      "$ref": "libs/shared/schemas/internals/contact.json"
+    },
+    "Processing": {
+      "$ref": "libs/shared/schemas/internals/processing.json"
+    },
+    "Variety": {
+      "$ref": "libs/shared/schemas/internals/variety.json"
+    }
+  },
+  "examples": [
+    {
+      "id": "b1b2b3b4-b5b6-b7b8-b9b0-b1b2b3b4b5b6",
+      "name": "Coffee 1",
+      "facility": {
+        "name": "Washing station",
+        "location": {
+          "country": "ET"
+        }
+      },
+      "processing": {
+        "name": "The wash",
+        "sourceState": "dried_cherries",
+        "sourceWeight": {
+          "amount": 10,
+          "unit": "kg"
+        },
+        "targetState": "wet_parchment",
+        "targetWeight": {
+          "amount": 9,
+          "unit": "kg"
+        },
+        "start": "2021-01-01T00:00:00.000Z",
+        "end": "2021-01-01T00:00:00.000Z",
+        "method": "fully_washed"
+      },
+      "varieties": ["Heirloom"],
+      "createdAt": "2021-01-01T00:00:00Z",
+      "updatedAt": "2021-01-01T00:00:00Z"
+    }
+  ]
+}

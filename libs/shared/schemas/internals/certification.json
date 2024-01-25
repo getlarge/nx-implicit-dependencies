@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "A schema describing supply chain certification.",
+  "title": "Certification",
+  "anyOf": [
+    {
+      "title": "Certification",
+      "type": "string",
+      "enum": [
+        "Fairtrade",
+        "Fair Trade International",
+        "Fair for Life",
+        "Rainforest Alliance",
+        "Organic",
+        "Bird Friendly",
+        "Direct Trade",
+        "UTZ Certified"
+      ]
+    },
+    {
+      "type": "string"
+    }
+  ],
+  "examples": ["Fairtrade"]
+}

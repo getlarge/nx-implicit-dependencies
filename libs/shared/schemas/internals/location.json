@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Location",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "country": {
+      "$ref": "#/$defs/Country"
+    },
+    "state": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string",
+      "description": "The specific region within the country."
+    },
+    "subregion": {
+      "type": "string",
+      "description": "The specific subregion within the region."
+    },
+    "zip": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "altitude": {
+      "type": "number",
+      "description": "The altitude in meters."
+    },
+    "latitude": {
+      "type": "number",
+      "description": "The latitude coordinate."
+    },
+    "longitude": {
+      "type": "number",
+      "description": "The longitude coordinate."
+    }
+  },
+  "additionalProperties": false,
+  "required": ["country"],
+  "dependentRequired": {
+    "subregion": ["region"],
+    "latitude": ["longitude"],
+    "longitude": ["latitude"]
+  },
+  "$defs": {
+    "Country": {
+      "$ref": "libs/shared/schemas/internals/country.json"
+    }
+  },
+  "examples": [
+    {
+      "name": "Work",
+      "country": "US",
+      "state": "CA",
+      "region": "San Francisco",
+      "subregion": "Mission District",
+      "zip": "94110",
+      "city": "San Francisco",
+      "street": "123 Main St",
+      "altitude": 100,
+      "latitude": 37.7749,
+      "longitude": 122.4194
+    },
+    {
+      "name": "Home",
+      "country": "FR",
+      "zip": "17000",
+      "city": "La Rochelle",
+      "street": "Place de la Résistance"
+    }
+  ]
+}

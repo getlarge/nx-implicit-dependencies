@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Processing",
+  "description": "The process of coffee beans transformation.",
+  "$comment": "The International Coffee Organization (ICO) the following conversions, dry cherry => green brean : 0.5 ; parchment => green bean : 0.8 ; roasted bean => green bean : 1.19",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the process.",
+      "type": "string"
+    },
+    "sourceState": {
+      "description": "The incoming state of the coffe.",
+      "$ref": "#/$defs/ProcessingState"
+    },
+    "sourceWeight": {
+      "description": "The incoming weight of the coffe.",
+      "$ref": "#/$defs/Weight"
+    },
+    "targetState": {
+      "description": "The outgoing state of the coffe.",
+      "$ref": "#/$defs/ProcessingState"
+    },
+    "targetWeight": {
+      "description": "The outgoing weight of the coffe.",
+      "$ref": "#/$defs/Weight"
+    },
+    "start": {
+      "description": "The start date of the process.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "end": {
+      "description": "The end date of the process.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "method": {
+      "description": "The processing method.",
+      "$ref": "#/$defs/ProcessingMethod"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "sourceState",
+    "sourceWeight",
+    "targetState",
+    "targetWeight",
+    "start",
+    "end",
+    "method"
+  ],
+  "$defs": {
+    "ProcessingMethod": {
+      "$ref": "libs/shared/schemas/internals/processing-method.json"
+    },
+    "ProcessingState": {
+      "$ref": "libs/shared/schemas/internals/processing-state.json"
+    },
+    "Weight": {
+      "$ref": "libs/shared/schemas/internals/weight.json"
+    }
+  },
+  "examples": [
+    {
+      "name": "The wash",
+      "sourceState": "dried_cherries",
+      "sourceWeight": {
+        "amount": 10,
+        "unit": "kg"
+      },
+      "targetState": "wet_parchment",
+      "targetWeight": {
+        "amount": 9,
+        "unit": "kg"
+      },
+      "start": "2021-01-01T00:00:00.000Z",
+      "end": "2021-01-01T00:00:00.000Z",
+      "method": "fully_washed"
+    },
+    {
+      "name": "Super Roasting",
+      "sourceState": "green",
+      "sourceWeight": {
+        "amount": 1000,
+        "unit": "g"
+      },
+      "targetState": "roasted",
+      "targetWeight": {
+        "amount": 900,
+        "unit": "g"
+      },
+      "start": "2021-01-01T00:00:00.000Z",
+      "end": "2021-01-01T00:00:00.000Z",
+      "method": "other"
+    }
+  ]
+}

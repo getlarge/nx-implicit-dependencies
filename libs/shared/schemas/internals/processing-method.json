@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessingMethod",
+  "description": "The method used to process the coffee, e.g., washed, natural, or honey.",
+  "type": "string",
+  "enum": [
+    "natural",
+    "fully_washed",
+    "semi_washed",
+    "pulped_natural",
+    "honey",
+    "carbonic_maceration",
+    "wet_hulled",
+    "other"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shipping",
+  "description": "A schema describing coffee shipping information.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "carrier": {
+      "type": "string",
+      "description": "The carrier used for shipping the coffee."
+    },
+    "departureDate": {
+      "type": "string",
+      "description": "The departure date of the shipment.",
+      "format": "date"
+    },
+    "estimatedArrivalDate": {
+      "type": "string",
+      "description": "The estimated arrival date of the shipment.",
+      "format": "date"
+    },
+    "shippingMethod": {
+      "$ref": "#/$defs/ShippingMethod"
+    }
+  },
+  "required": [
+    "carrier",
+    "departureDate",
+    "estimatedArrivalDate",
+    "shippingMethod"
+  ],
+  "$defs": {
+    "ShippingMethod": {
+      "type": "string",
+      "title": "ShippingMethod",
+      "description": "The shipping method used to transport the coffee.",
+      "enum": ["Air", "Ocean", "Ground", "Rail", "Other"]
+    }
+  }
+}

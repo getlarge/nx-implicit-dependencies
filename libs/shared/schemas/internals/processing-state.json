@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessingState",
+  "description": "The coffee state from harvested cherries to green beans.",
+  "type": "string",
+  "enum": [
+    "raw_cherries",
+    "dried_cherries",
+    "wet_parchment",
+    "parchment",
+    "wet_green",
+    "raw_green",
+    "green"
+  ]
+}

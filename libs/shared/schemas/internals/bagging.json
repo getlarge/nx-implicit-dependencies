@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bagging",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "weight": {
+      "$ref": "#/$defs/Weight"
+    },
+    "count": {
+      "title": "BaggingCount",
+      "type": "integer",
+      "description": "The number of bags.",
+      "minimum": 1
+    },
+    "type": {
+      "$ref": "#/$defs/BaggingType"
+    }
+  },
+  "required": ["weight", "count", "type"],
+  "$defs": {
+    "Weight": {
+      "$ref": "libs/shared/schemas/internals/weight.json"
+    },
+    "BaggingType": {
+      "type": "string",
+      "title": "BaggingType",
+      "description": "The type of bag used to package the coffee.",
+      "enum": [
+        "Jute",
+        "GrainPro",
+        "Ecotact",
+        "Burlap",
+        "Polypropylene",
+        "Other"
+      ],
+      "default": "Other"
+    }
+  },
+  "examples": [
+    {
+      "weight": {
+        "value": 1,
+        "unit": "kg"
+      },
+      "count": 10,
+      "type": "Jute"
+    }
+  ]
+}

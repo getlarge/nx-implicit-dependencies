@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Contact",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The full name of the contact."
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "description": "The email address of the contact.",
+      "format": "email"
+    },
+    "website": {
+      "title": "Website",
+      "type": "string",
+      "format": "uri"
+    },
+    "phone": {
+      "title": "Phone",
+      "type": "string",
+      "description": "The phone number of the contact.",
+      "pattern": "^\\+?[1-9]\\d{1,14}$"
+    },
+    "area": {
+      "$ref": "#/$defs/Area"
+    },
+    "location": {
+      "$ref": "#/$defs/Location"
+    },
+    "organizationName": {
+      "title": "OrganizationName",
+      "type": "string",
+      "description": "The name of the company|association the contact works for."
+    }
+  },
+  "required": ["name"],
+  "dependentRequired": {
+    "firstName": ["lastName"],
+    "lastName": ["firstName"],
+    "organizationName": ["email", "location"]
+  },
+  "$defs": {
+    "MeasurementAmount": {
+      "$ref": "libs/shared/schemas/internals/measurement-amount.json"
+    },
+    "Area": {
+      "title": "Area",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/MeasurementAmount"
+        },
+        "unit": {
+          "title": "AreaUnit",
+          "type": "string",
+          "const": "m2",
+          "default": "m2"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["amount", "unit"]
+    },
+    "Location": {
+      "$ref": "libs/shared/schemas/internals/location.json"
+    }
+  },
+  "examples": [
+    {
+      "name": "John Doe",
+      "email": "email@email.com",
+      "phone": "+1234567890",
+      "website": "https://example.com",
+      "area": {
+        "value": 100,
+        "unit": "m2"
+      },
+      "location": {
+        "name": "Home",
+        "country": "FR",
+        "zip": "17000",
+        "city": "La Rochelle",
+        "street": "Place de la Résistance"
+      },
+      "organizationName": "Example Inc.",
+      "extraProperty": "additionalValue"
+    }
+  ]
+}

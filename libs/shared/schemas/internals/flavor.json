@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Flavor",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "A description of the coffee's flavor profile using the SCA flavor wheel.",
+  "properties": {
+    "category": {
+      "$ref": "#/$defs/Category"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "The specific subcategory within the main flavor category from the SCA flavor wheel."
+    },
+    "intensity": {
+      "$ref": "#/$defs/Intensity"
+    }
+  },
+  "required": ["category", "intensity"],
+  "$defs": {
+    "Category": {
+      "type": "string",
+      "title": "Category",
+      "description": "The main flavor category from the SCA flavor wheel.",
+      "enum": [
+        "Fruity",
+        "Floral",
+        "Green/Vegetative",
+        "Nutty/Cocoa",
+        "Roasted",
+        "Sour/Fermented",
+        "Spices",
+        "Sweet",
+        "Other"
+      ]
+    },
+    "Intensity": {
+      "type": "integer",
+      "description": "The intensity of the flavor on a scale of 1 to 10, with 1 being the least intense and 10 being the most intense.",
+      "minimum": 1,
+      "maximum": 10
+    }
+  },
+  "examples": [
+    {
+      "category": "Fruity",
+      "subcategory": "Berry",
+      "intensity": 5
+    }
+  ]
+}

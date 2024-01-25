@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reception",
+  "title": "Reception",
+  "type": "object",
+  "description": "A reception is the step before processing. It describes when and where the coffee is received. The weights and prices of the reception items are aggregated at the reception. The aggregate weight of a reception is divided among one or more batches. Each batch must be linked to the original source of the coffee in order to preserve traceability throughout the supply chain.",
+  "allOf": [
+    {
+      "$ref": "#/$defs/ReceptionPartial"
+    },
+    {
+      "title": "ReceptionExtras",
+      "type": "object",
+      "properties": {
+        "lots": {
+          "title": "Lots",
+          "type": "array",
+          "description": "The lots that were received.",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/LotPartial"
+              },
+              {
+                "title": "CID",
+                "type": "string",
+                "format": "cid"
+              }
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true,
+      "required": ["lots"]
+    }
+  ],
+  "$defs": {
+    "ReceptionPartial": {
+      "$ref": "libs/shared/schemas/internals/reception-partial.json"
+    },
+    "LotPartial": {
+      "$ref": "libs/shared/schemas/internals/lot-partial.json"
+    }
+  },
+  "examples": [
+    {
+      "id": "b1b2b3b4-b5b6-b7b8-b9b0-b1b2b3b4b5b6",
+      "facility": {
+        "name": "Coffeeshop",
+        "location": {
+          "street": "Mainstreet 1",
+          "city": "New York",
+          "country": "US"
+        }
+      },
+      "growingConditions": {
+        "climate": {
+          "temperature": {
+            "min": 15,
+            "max": 25,
+            "unit": "°C"
+          },
+          "rainfall": {
+            "min": 1000,
+            "max": 1500,
+            "unit": "mm"
+          },
+          "humidity": {
+            "min": 70,
+            "max": 80,
+            "unit": "%"
+          }
+        },
+        "soilType": "Volcanic",
+        "elevation": {
+          "amount": 2000,
+          "unit": "m"
+        }
+      },
+      "harvesting": {
+        "time": {
+          "start": "March",
+          "end": "April"
+        },
+        "method": "hand-picking",
+        "labor": "Local workers are paid for their labor."
+      },
+      "items": [
+        {
+          "grossWeight": {
+            "amount": 1050,
+            "unit": "lb"
+          },
+          "origin": {
+            "name": "Coffee farm",
+            "location": {
+              "street": "Mainstreet 1",
+              "city": "New York",
+              "country": "US"
+            },
+            "role": "farm"
+          },
+          "part": "export",
+          "price": {
+            "amount": 5,
+            "currency": "USD",
+            "unit": "lb"
+          },
+          "weight": {
+            "amount": 1000,
+            "unit": "lb"
+          }
+        }
+      ],
+      "receptionDate": "2020-01-01T00:00:00.000Z",
+      "state": "raw_cherries"
+    }
+  ]
+}

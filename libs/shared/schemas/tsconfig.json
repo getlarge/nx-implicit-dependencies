@@ -5,6 +5,8 @@
     "lib": [
       "es2021",
     ],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -15,6 +17,9 @@
   "files": [],
   "include": [],
   "references": [
+    {
+      "path": "./tsconfig.editor.json"
+    },
     {
       "path": "./tsconfig.lib.json"
     },

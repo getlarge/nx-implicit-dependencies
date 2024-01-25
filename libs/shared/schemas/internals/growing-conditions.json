@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GrowingConditions",
+  "type": "object",
+  "description": "Information about the coffee growing conditions.",
+  "properties": {
+    "climate": {
+      "$ref": "#/$defs/Climate"
+    },
+    "soilType": {
+      "title": "SoilType",
+      "type": "string",
+      "description": "The type of soil in the coffee-growing area, which can influence the flavor profile of the coffee."
+    },
+    "elevation": {
+      "$ref": "#/$defs/Elevation"
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "$defs": {
+    "MeasurementAmount": {
+      "$ref": "libs/shared/schemas/internals/measurement-amount.json"
+    },
+    "MeasurementRange": {
+      "$ref": "libs/shared/schemas/internals/measurement-range.json"
+    },
+    "Elevation": {
+      "title": "Elevation",
+      "type": "object",
+      "description": "The elevation (in meters) at which the coffee is grown.",
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/MeasurementAmount"
+        },
+        "unit": {
+          "type": "string",
+          "const": "m",
+          "default": "m"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["amount", "unit"]
+    },
+    "Climate": {
+      "type": "object",
+      "title": "Climate",
+      "description": "A description of the climate of the coffee-growing area, such as temperature range, rainfall patterns, and humidity.",
+      "properties": {
+        "temperature": {
+          "title": "Temperature",
+          "description": "The range of temperatures in the coffee-growing area, e.g., '15-25 °C' or '20-30 °C'.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/MeasurementRange"
+            },
+            {
+              "type": "object",
+              "title": "TemperatureUnit",
+              "properties": {
+                "unit": {
+                  "type": "string",
+                  "const": "°C",
+                  "default": "°C"
+                }
+              },
+              "unevaluatedProperties": true,
+              "additionalProperties": true,
+              "required": ["unit"]
+            }
+          ]
+        },
+        "rainfall": {
+          "title": "Rainfall",
+          "description": "The average rainfall in the coffee-growing area, e.g., '1000-1500 mm' or '1500-2000 mm'.",
+          "allOf": [
+            {
+              "$ref": "#/$defs/MeasurementRange"
+            },
+            {
+              "type": "object",
+              "title": "RainfallUnit",
+              "properties": {
+                "unit": {
+                  "type": "string",
+                  "const": "mm",
+                  "default": "mm"
+                }
+              },
+              "unevaluatedProperties": true,
+              "additionalProperties": true,
+              "required": ["unit"]
+            }
+          ]
+        },
+        "humidity": {
+          "title": "Humidity",
+          "type": "object",
+          "description": "The average humidity in the coffee-growing area, e.g., '70-80%' or '80-90%'.",
+          "properties": {
+            "min": {
+              "type": "number",
+              "multipleOf": 0.1,
+              "minimum": 0,
+              "maximum": 100
+            },
+            "max": {
+              "type": "number",
+              "multipleOf": 0.1,
+              "minimum": 0,
+              "maximum": 100
+            },
+            "unit": {
+              "type": "string",
+              "const": "%",
+              "default": "%"
+            },
+            "additionalProperties": false
+          },
+          "required": ["min", "max", "unit"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": [
+    {
+      "climate": {
+        "temperature": {
+          "min": 15,
+          "max": 25,
+          "unit": "°C"
+        },
+        "rainfall": {
+          "min": 1000,
+          "max": 1500,
+          "unit": "mm"
+        },
+        "humidity": {
+          "min": 70,
+          "max": 80,
+          "unit": "%"
+        }
+      },
+      "soilType": "Volcanic",
+      "elevation": {
+        "amount": 1500,
+        "unit": "m"
+      }
+    }
+  ]
+}

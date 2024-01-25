@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Weight",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "$ref": "#/$defs/MeasurementAmount"
+    },
+    "unit": {
+      "$ref": "#/$defs/WeightUnit"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["amount", "unit"],
+  "$defs": {
+    "MeasurementAmount": {
+      "$ref": "libs/shared/schemas/internals/measurement-amount.json"
+    },
+    "WeightUnit": {
+      "$ref": "libs/shared/schemas/internals/weight-unit.json"
+    }
+  }
+}

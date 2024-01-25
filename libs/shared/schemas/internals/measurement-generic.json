@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeasurementGeneric",
+  "description": "A measurement is a quantity of a physical property, such as length, mass, or electric current, associated with a point in space and time.",
+  "$comment": "WIP",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "$ref": "#/$defs/MeasurementAmount"
+    },
+    "unit": {
+      "$dynamicRef": "#MeasurementUnit"
+    }
+  },
+  "required": ["amount", "unit"],
+  "$defs": {
+    "MeasurementAmount": {
+      "$ref": "libs/shared/schemas/internals/measurement-amount.json"
+    },
+    "MeasurementUnit": {
+      "$dynamicAnchor": "MeasurementUnit",
+      "not": true
+    }
+  }
+}

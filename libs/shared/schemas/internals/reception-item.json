@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReceptionItem",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "grossWeight": {
+      "$ref": "#/$defs/Weight"
+    },
+    "growingConditions": {
+      "$ref": "#/$defs/GrowingConditions"
+    },
+    "harvesting": {
+      "$comment": "TODO: if origin.role is 'farm' or 'field', .state is 'raw_cherries' then this is required or ",
+      "$ref": "#/$defs/Harvesting"
+    },
+    "origin": {
+      "description": "The source from which the coffee was previously processed ( e.g. the farm where the coffee was produced, the mill where the coffee was processed, etc. )",
+      "$ref": "#/$defs/Origin"
+    },
+    "part": {
+      "$ref": "#/$defs/BatchPart"
+    },
+    "price": {
+      "$ref": "#/$defs/RelativePrice"
+    },
+    "weight": {
+      "$ref": "#/$defs/Weight"
+    }
+  },
+  "required": ["origin", "weight"],
+  "$defs": {
+    "BatchPart": {
+      "$ref": "libs/shared/schemas/internals/batch-part.json"
+    },
+    "GrowingConditions": {
+      "$ref": "libs/shared/schemas/internals/growing-conditions.json"
+    },
+    "Harvesting": {
+      "$ref": "libs/shared/schemas/internals/harvesting.json"
+    },
+    "Origin": {
+      "$ref": "libs/shared/schemas/internals/origin.json"
+    },
+    "RelativePrice": {
+      "$ref": "libs/shared/schemas/internals/relative-price.json"
+    },
+    "Weight": {
+      "$ref": "libs/shared/schemas/internals/weight.json"
+    }
+  }
+}

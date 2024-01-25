@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lot",
+  "title": "Lot",
+  "description": "A lot is a collection of batches that share the same processing target state.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/$defs/LotPartial"
+    },
+    {
+      "title": "LotExtras",
+      "type": "object",
+      "properties": {
+        "batches": {
+          "$comment": "batch mix sharing the same processing targetState.",
+          "title": "Batches",
+          "type": "array",
+          "description": "The batches that make up this lot.",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/BatchPartial"
+              },
+              {
+                "title": "CID",
+                "type": "string",
+                "format": "cid"
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "readOnly": true,
+          "sameProcessingTargetState": true
+        }
+      },
+      "additionalProperties": true,
+      "required": ["batches"]
+    }
+  ],
+  "$defs": {
+    "BatchPartial": {
+      "$ref": "libs/shared/schemas/internals/batch-partial.json"
+    },
+    "LotPartial": {
+      "$ref": "libs/shared/schemas/internals/lot-partial.json"
+    }
+  }
+}

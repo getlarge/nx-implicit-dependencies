@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessingStep",
+  "$comment": "raw cherries - dried cherries - not screened and sorted yet - sorted - as traded and shipped - roasted - blended .",
+  "description": "The coffee transformation's chain step.",
+  "type": "string",
+  "enum": [
+    "harvest",
+    "dry_cherry",
+    "parchment",
+    "raw_green",
+    "green",
+    "roasting",
+    "blending"
+  ]
+}

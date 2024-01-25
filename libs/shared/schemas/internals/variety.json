@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The coffee bean variety.",
+  "title": "Variety",
+  "anyOf": [
+    {
+      "title": "Variety",
+      "type": "string",
+      "enum": [
+        "Agaro",
+        "Arusha",
+        "Ateng",
+        "Batian",
+        "Bergandal",
+        "Blue Mountain",
+        "Bourbon",
+        "Castillo",
+        "Catimor",
+        "Catuai",
+        "Caturra",
+        "Cauvery",
+        "Excelsa",
+        "Geisha",
+        "Icatu",
+        "Jackson",
+        "Kent",
+        "K7",
+        "Laurina",
+        "Liberica",
+        "Maragogype",
+        "Mibrizi",
+        "Moka",
+        "Mundo Novo",
+        "Mysore",
+        "N5",
+        "N39",
+        "Onan Ganjang",
+        "Pacamara",
+        "Red Bourbon",
+        "Ruiru 11",
+        "S274",
+        "S795",
+        "Selection 5B",
+        "Selection 6",
+        "Selection 9",
+        "Selection 10",
+        "Sidikalang",
+        "SL14",
+        "SL28",
+        "SL34",
+        "SV-2006",
+        "Sudan Rume",
+        "TimTim",
+        "Typica",
+        "Typica/Nyara",
+        "Yellow Bourbon"
+      ]
+    },
+    {
+      "type": "string"
+    }
+  ]
+}

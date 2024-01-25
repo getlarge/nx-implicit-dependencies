@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchPart",
+  "type": "string",
+  "enum": [
+    "ripe",
+    "over ripe",
+    "unripe",
+    "dry pod",
+    "export",
+    "local",
+    "primary",
+    "secondary",
+    "tertiary",
+    "floater",
+    "inferior",
+    "superior",
+    "discard",
+    "cascara",
+    "other",
+    "a",
+    "b",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CupScore",
+  "type": "number",
+  "description": "The overall cupping score for the coffee. The score rely on Specialty Coffee Association (SCA) standards reported in a range of 80 to 100",
+  "minimum": 80,
+  "maximum": 100
+}

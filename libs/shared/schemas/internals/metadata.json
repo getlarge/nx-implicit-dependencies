@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Metadata",
+  "description": "A schema storing schema metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the coffee information was first created."
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the coffee information was last updated."
+    },
+    "license": {
+      "type": "string",
+      "description": "The type of license under which the coffee information is published.",
+      "const": "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    },
+    "resourcePattern": {
+      "type": "string",
+      "description": "The naming convention pattern for related resources. It can be used to map resources on a static server.",
+      "examples": ["{resourceType}/{version}/{resourceName}.{extension}"]
+    },
+    "source": {
+      "type": "string",
+      "description": "A reference to the primary source of the coffee information, such as a URL or a citation."
+    },
+    "state": {
+      "$ref": "#/$defs/MetadataState"
+    },
+    "version": {
+      "$ref": "#/$defs/Version"
+    }
+  },
+  "required": ["version"],
+  "dependentRequired": {
+    "state": ["created", "lastUpdated"],
+    "created": ["state", "lastUpdated"],
+    "lastUpdated": ["state", "created"],
+    "license": ["author"]
+  },
+  "$defs": {
+    "MetadataState": {
+      "title": "MetadataState",
+      "type": "string",
+      "description": "The state of the coffee information.",
+      "enum": ["draft", "published", "archived"]
+    },
+    "Version": {
+      "title": "Version",
+      "type": "string",
+      "description": "The version of the schema.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    }
+  }
+}

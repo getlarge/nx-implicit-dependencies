@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RelativePrice",
+  "type": "object",
+  "additionalProperties": false,
+  "description": "A price relative to a base unit.",
+  "allOf": [
+    {
+      "$ref": "#/$defs/Price"
+    },
+    {
+      "properties": {
+        "unit": {
+          "$ref": "#/$defs/WeightUnit"
+        }
+      },
+      "required": ["unit"]
+    }
+  ],
+  "$defs": {
+    "Price": {
+      "$ref": "libs/shared/schemas/internals/price.json"
+    },
+    "WeightUnit": {
+      "$ref": "libs/shared/schemas/internals/weight-unit.json"
+    }
+  },
+  "examples": [
+    {
+      "amount": 1.5,
+      "currency": "EUR",
+      "unit": "kg"
+    }
+  ]
+}

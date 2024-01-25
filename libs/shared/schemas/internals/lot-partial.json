@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LotPartial",
+  "description": "A coffee lot is a collection of coffee batches that are processed together. A lot is the smallest unit of coffee that can be sold.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The lot ID.",
+      "format": "uuid"
+    },
+    "arrivalDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "certifications": {
+      "title": "Certifications",
+      "type": "array",
+      "description": "A list of certifications the coffee holds, e.g., 'Organic', 'Fair Trade', or 'Rainforest Alliance'.",
+      "items": {
+        "$ref": "#/$defs/Certification"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "countriesOfOrigin": {
+      "$comment": "computed value of all unique countries of facilities processing the batches.",
+      "title": "AggregatedCountriesOfOrigin",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Country"
+      },
+      "readOnly": true,
+      "default": [],
+      "uniqueItems": true,
+      "jsonata": "$distinct([batches.facility.location.country])"
+    },
+    "expectedWeight": {
+      "$comment": "computed value of the aggregated target weight of the batches",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Weight"
+        },
+        {
+          "title": "Null",
+          "type": "null"
+        }
+      ],
+      "readOnly": true,
+      "default": null,
+      "jsonata": "batches.processing.targetWeight{'weight': { 'amount': $round($sum($.(unit = 'kg' ? amount : unit = 'g' ? amount / 1000 : unit = 'lb' ? amount * 0.453592 : unit = 'oz' ? amount * 0.0283495)), 3), 'unit': 'kg'}}"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "processingMethods": {
+      "$comment": "computed value of all methods used to transform coffee batches.",
+      "title": "AggregatedProcessingMethods",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ProcessingMethod"
+      },
+      "readOnly": true,
+      "default": [],
+      "uniqueItems": true,
+      "jsonata": "$distinct([batches.processing.method])"
+    },
+    "sourceWeight": {
+      "$comment": "computed value of the aggregated weight of the batches sources, grouped by processing state.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AgreggateWeight"
+        },
+        {
+          "title": "Null",
+          "type": "null"
+        }
+      ],
+      "readOnly": true,
+      "default": null,
+      "jsonata": "batches.processing{sourceState: {'weight': {'amount': $round($sum($.sourceWeight.(unit = 'kg' ? amount : unit = 'g' ? amount / 1000 : unit = 'lb' ? amount * 0.453592 : unit = 'oz' ? amount * 0.0283495)), 3),'unit': 'kg'}}}"
+    },
+    "step": {
+      "description": "The current transformation step of the coffee lot.",
+      "$ref": "#/$defs/Step"
+    },
+    "varieties": {
+      "title": "AggregatedVarieties",
+      "$comment": "computed value of all varieties contained in batches.",
+      "type": "array",
+      "items": {
+        "title": "Varieties",
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/Variety"
+        },
+        "uniqueItems": true
+      },
+      "readOnly": true,
+      "default": [],
+      "jsonata": "[batches.[varieties]]"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["id", "step"],
+  "$defs": {
+    "AgreggateWeight": {
+      "title": "AggregateWeight",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/$defs/Step"
+      },
+      "patternProperties": {
+        "": {
+          "$ref": "#/$defs/Weight"
+        }
+      },
+      "examples": [
+        {
+          "green": {
+            "amount": 100,
+            "unit": "kg"
+          },
+          "roasted": {
+            "amount": 100,
+            "unit": "kg"
+          }
+        }
+      ]
+    },
+    "BatchPartial": {
+      "$ref": "libs/shared/schemas/internals/batch-partial.json"
+    },
+    "Certification": {
+      "$ref": "libs/shared/schemas/internals/certification.json"
+    },
+    "Country": {
+      "$ref": "#/$defs/BatchPartial/$defs/Contact/$defs/Location/$defs/Country"
+    },
+    "Metadata": {
+      "$ref": "libs/shared/schemas/internals/metadata.json"
+    },
+    "ProcessingMethod": {
+      "$ref": "#/$defs/BatchPartial/$defs/Processing/$defs/ProcessingMethod"
+    },
+    "Step": {
+      "$ref": "libs/shared/schemas/internals/step.json"
+    },
+    "Variety": {
+      "$ref": "#/$defs/BatchPartial/$defs/Variety"
+    },
+    "Weight": {
+      "$ref": "libs/shared/schemas/internals/weight.json"
+    },
+    "WeightUnit": {
+      "$ref": "libs/shared/schemas/internals/weight-unit.json"
+    }
+  }
+}

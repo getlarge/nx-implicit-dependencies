@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExportPricing",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "freightOnBoard": {
+      "description": "Freight (or free) on board (FOB) prices are 'paid for coffees that are delivered and placed onto the ship at the port in the country of embarkation. They typically cover any overland transportation costs from mills or warehouses to the port of origin, but not any overseas shipping, insurance, or any transportation, customs, and overland freight costs incurred on arrival to the port of destination' (International Chamber of Commerce)",
+      "$ref": "$defs/RelativePrice"
+    },
+    "farmGate": {
+      "description": "The base price of the raw coffee product.",
+      "$ref": "#/$defs/RelativePrice"
+    },
+    "extraFees": {
+      "title": "ExtraFees",
+      "type": "object",
+      "properties": {
+        "exportFees": {
+          "description": "The fees associated with exporting the coffee.",
+          "$ref": "$defs/RelativePrice"
+        },
+        "packagingFees": {
+          "description": "The fees associated with packaging the coffee.",
+          "$ref": "$defs/RelativePrice"
+        },
+        "otherFees": {
+          "description": "Any other fees related to the coffee.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OtherFee"
+          }
+        }
+      }
+    }
+  },
+  "required": ["freightOnBoard"],
+  "$defs": {
+    "Price": {
+      "$ref": "libs/shared/schemas/internals/price.json"
+    },
+    "RelativePrice": {
+      "$ref": "libs/shared/schemas/internals/relative-price.json"
+    },
+    "OtherFee": {
+      "title": "OtherFee",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "The name of the fee.",
+          "type": "string"
+        },
+        "price": {
+          "description": "The price of the fee.",
+          "$ref": "#/$defs/Price"
+        }
+      },
+      "required": ["name", "price"]
+    }
+  }
+}

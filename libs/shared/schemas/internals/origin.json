@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Origin",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "#/$defs/Contact"
+    },
+    {
+      "type": "object",
+      "title": "OriginDetails",
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/OriginRole"
+        }
+      },
+      "unevaluatedProperties": true,
+      "additionalProperties": true,
+      "required": ["role"]
+    }
+  ],
+  "$defs": {
+    "Contact": {
+      "$ref": "libs/shared/schemas/internals/contact.json"
+    },
+    "OriginRole": {
+      "title": "OriginRole",
+      "type": "string",
+      "enum": ["farm", "field", "community", "cooperative", "picker", "other"]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Harvesting",
+  "type": "object",
+  "description": "Information about the coffee harvesting process.",
+  "properties": {
+    "time": {
+      "type": "object",
+      "title": "HarvestingTime",
+      "description": "The time of year when the coffee was harvested, e.g., 'March-April' or 'October-November'.",
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/Month"
+        },
+        "end": {
+          "$ref": "#/$defs/Month"
+        }
+      }
+    },
+    "method": {
+      "$ref": "#/$defs/HarvestingMethod"
+    },
+    "labor": {
+      "type": "string",
+      "description": "A description of the labor practices used in the harvest, such as the use of local workers or migrant labor, if some or all of the labor is mechanized, and if the labor is paid or unpaid or if team are incentivized for uniform ripeness."
+    }
+  },
+  "required": ["time", "method"],
+  "additionalProperties": false,
+  "$defs": {
+    "HarvestingMethod": {
+      "type": "string",
+      "description": "The method used for harvesting the coffee cherries, e.g., 'hand-picking' or 'mechanical'.",
+      "title": "HarvestingMethod",
+      "enum": ["hand-picking", "mechanical", "strip-picking", "other"]
+    },
+    "Month": {
+      "type": "string",
+      "title": "Month",
+      "description": "A month of the year, e.g., 'January' or 'February'.",
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "time": {
+        "start": "March",
+        "end": "April"
+      },
+      "method": "hand-picking",
+      "labor": "Local workers are paid for their labor."
+    }
+  ]
+}

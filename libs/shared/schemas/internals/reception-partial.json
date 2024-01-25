@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReceptionPartial",
+  "description": "A reception is the step before processing. It describes when and where the coffee is received. The weights and prices of the reception items are aggregated at the reception. The aggregate weight of a reception is divided among one or more batches. Each batch must be linked to the original source of the coffee in order to preserve traceability throughout the supply chain.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The batch ID.",
+      "format": "uuid"
+    },
+    "facility": {
+      "description": "organisation or person that is responsible for the processing of the batch",
+      "$ref": "#/$defs/Contact"
+    },
+    "items": {
+      "type": "array",
+      "title": "ReceptionItems",
+      "description": "The items that were received.",
+      "items": {
+        "$ref": "#/$defs/ReceptionItem"
+      },
+      "minItems": 1
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "receptionDate": {
+      "type": "string",
+      "description": "The date the coffee was received.",
+      "format": "date-time"
+    },
+    "state": {
+      "description": "The state of the coffe at reception.",
+      "$ref": "#/$defs/ProcessingState"
+    }
+  },
+  "required": ["id", "receptionDate", "items", "state"],
+  "if": {
+    "properties": {
+      "state": {
+        "const": "raw_cherries"
+      }
+    }
+  },
+  "then": {
+    "properties": {
+      "items": {
+        "title": "ReceptionItems",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "title": "ReceptionItem",
+          "properties": {
+            "growingConditions": {
+              "$ref": "#/$defs/ReceptionItem/$defs/GrowingConditions"
+            },
+            "harvesting": {
+              "$comment": "TODO: if origin.role is 'farm' or 'field', .state is 'raw_cherries' then this is required or ",
+              "$ref": "#/$defs/ReceptionItem/$defs/Harvesting"
+            }
+          },
+          "required": ["growingConditions", "harvesting"]
+        }
+      }
+    },
+    "required": ["items"],
+    "additionalProperties": true
+  },
+  "$defs": {
+    "ReceptionItem": {
+      "$ref": "libs/shared/schemas/internals/reception-item.json"
+    },
+    "Contact": {
+      "$ref": "libs/shared/schemas/internals/contact.json"
+    },
+    "Metadata": {
+      "$ref": "libs/shared/schemas/internals/metadata.json"
+    },
+    "ProcessingState": {
+      "$ref": "libs/shared/schemas/internals/processing-state.json"
+    }
+  }
+}
