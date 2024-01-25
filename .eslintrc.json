@@ -1,0 +1,91 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:constants",
+                  "type:core",
+                  "type:env",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:constants",
+                "onlyDependOnLibsWithTags": ["type:constants"]
+              },
+              {
+                "sourceTag": "type:core",
+                "onlyDependOnLibsWithTags": [
+                  "type:constants",
+                  "type:core",
+                  "type:env",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:env",
+                "onlyDependOnLibsWithTags": [
+                  "type:constants",
+                  "type:env",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": [
+                  "type:constants",
+                  "type:env",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "platform:node",
+                "onlyDependOnLibsWithTags": ["platform:node", "platform:shared"]
+              },
+              {
+                "sourceTag": "platform:shared",
+                "onlyDependOnLibsWithTags": ["platform:shared"]
+              },
+              {
+                "sourceTag": "platform:browser",
+                "onlyDependOnLibsWithTags": [
+                  "platform:browser",
+                  "platform:shared"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
