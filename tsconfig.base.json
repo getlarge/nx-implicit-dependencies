@@ -14,10 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "strictNullChecks": true,
+    "strict": true,
     "paths": {
       "@getlarge/schemas": ["libs/shared/schemas/src/index.ts"],
       "@getlarge/ts-interfaces": ["libs/shared/ts-interfaces/src/index.ts"]
-    }
+    },
+    "plugins": [
+      {
+        "transform": "typia/lib/transform"
+      }
+    ]
   },
   "exclude": ["node_modules", "tmp"]
 }

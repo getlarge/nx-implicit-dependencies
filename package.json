@@ -2,7 +2,9 @@
   "name": "@getlarge/implicit-dependencies",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "ts-patch install && typia patch"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
@@ -11,7 +13,8 @@
     "axios": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "typia": "^5.4.1"
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.1.0",
@@ -43,8 +46,9 @@
     "prettier": "^2.6.2",
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
-    "ts-node": "10.9.1",
-    "typescript": "~5.2.2",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.1.2",
+    "typescript": "^5.3.2",
     "url-loader": "^4.1.1"
   }
 }

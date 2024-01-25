@@ -11,6 +11,9 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
+        "transformers": [
+          "typia/lib/transform"
+        ],
         "outputPath": "dist/apps/coffee-dealer",
         "main": "apps/coffee-dealer/src/main.ts",
         "tsConfig": "apps/coffee-dealer/tsconfig.app.json",
@@ -49,5 +52,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["type:app", "platform:node"]
 }
