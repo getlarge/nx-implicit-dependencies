@@ -21,8 +21,6 @@
     },
     "bundle": {
       "executor": "nx:run-commands",
-      "dependsOn": ["^bundle"],
-      "inputs": ["^bundle"],
       "outputs": ["{projectRoot}/src/lib/*.ts"],
       "options": {
         "command": "npx ts-node --project libs/shared/ts-interfaces/tsconfig.lib.json libs/shared/ts-interfaces/internals/bundle.ts",

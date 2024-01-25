@@ -15,6 +15,11 @@
         "{workspaceRoot}/eslint.config.js"
       ]
     },
+    "bundle": {
+      "cache": true,
+      "dependsOn": ["^bundle"],
+      "inputs": ["^bundle"]
+    },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
