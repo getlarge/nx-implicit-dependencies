@@ -52,17 +52,17 @@
               },
               {
                 "sourceTag": "platform:node",
-                "onlyDependOnLibsWithTags": ["platform:node", "platform:shared"]
+                "onlyDependOnLibsWithTags": ["platform:node", "platform:js"]
               },
               {
-                "sourceTag": "platform:shared",
-                "onlyDependOnLibsWithTags": ["platform:shared"]
+                "sourceTag": "platform:js",
+                "onlyDependOnLibsWithTags": ["platform:js"]
               },
               {
                 "sourceTag": "platform:browser",
                 "onlyDependOnLibsWithTags": [
                   "platform:browser",
-                  "platform:shared"
+                  "platform:js"
                 ]
               }
             ]

@@ -1,0 +1,45 @@
+{
+  "name": "ts-interfaces",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ts-interfaces/src",
+  "projectType": "library",
+  "namedInputs": {
+    "bundle": ["{projectRoot}/internals/*.ts"]
+  },
+  "implicitDependencies": ["schemas"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/ts-interfaces",
+        "main": "libs/shared/ts-interfaces/src/index.ts",
+        "tsConfig": "libs/shared/ts-interfaces/tsconfig.lib.json",
+        "assets": ["libs/shared/ts-interfaces/*.md"]
+      },
+      "dependsOn": ["bundle"]
+    },
+    "bundle": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["^bundle"],
+      "inputs": ["^bundle"],
+      "outputs": ["{projectRoot}/src/lib/*.ts"],
+      "options": {
+        "command": "npx ts-node --project libs/shared/ts-interfaces/tsconfig.lib.json libs/shared/ts-interfaces/internals/bundle.ts",
+        "cwd": "."
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/shared/ts-interfaces/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["platform:js", "type:core"]
+}
