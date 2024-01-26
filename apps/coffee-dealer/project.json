@@ -12,7 +12,14 @@
         "target": "node",
         "compiler": "tsc",
         "transformers": [
-          "typia/lib/transform"
+          "typia/lib/transform",
+          {
+            "name": "@nestia/core/lib/transform",
+            "options": {
+              "validate": "assert",
+              "stringify": "assert"
+            }
+          }
         ],
         "outputPath": "dist/apps/coffee-dealer",
         "main": "apps/coffee-dealer/src/main.ts",
