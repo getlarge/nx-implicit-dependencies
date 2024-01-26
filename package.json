@@ -1,9 +1,14 @@
 {
-  "name": "@getlarge/implicit-dependencies",
+  "name": "@getlarge/nx-implicit-dependencies",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "prepare": "ts-patch install && typia patch"
+  },
+  "homepage": "https://github.com/getlarge/nx-implicit-dependencies",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:getlarge/nx-implicit-dependencies.git"
   },
   "private": true,
   "dependencies": {
