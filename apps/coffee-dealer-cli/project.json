@@ -1,0 +1,53 @@
+{
+  "name": "coffee-dealer-cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/coffee-dealer-cli/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/coffee-dealer-cli",
+        "main": "apps/coffee-dealer-cli/src/main.ts",
+        "tsConfig": "apps/coffee-dealer-cli/tsconfig.app.json",
+        "assets": ["apps/coffee-dealer-cli/src/assets"],
+        "webpackConfig": "apps/coffee-dealer-cli/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "coffee-dealer-cli:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "coffee-dealer-cli:build:development"
+        },
+        "production": {
+          "buildTarget": "coffee-dealer-cli:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/coffee-dealer-cli/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
