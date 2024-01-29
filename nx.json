@@ -18,7 +18,7 @@
     "bundle": {
       "cache": true,
       "dependsOn": ["^bundle"],
-      "inputs": ["^bundle"]
+      "inputs": ["^internals"]
     },
     "@nx/jest:jest": {
       "cache": true,
@@ -44,7 +44,12 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/test-setup.[jt]s"
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/internals/*"
+    ],
+    "internals": [
+      "{projectRoot}/internals/**/*.[jt]s",
+      "{projectRoot}/internals/**/*.json"
     ],
     "sharedGlobals": []
   },

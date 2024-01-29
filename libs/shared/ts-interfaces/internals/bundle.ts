@@ -63,6 +63,10 @@ async function compileSchemaFiles(): Promise<void> {
       console.info(`${jsonSchemaPath}.ts - 🎬`);
       const fullPath = join(schemasLibPath, `${jsonSchemaPath}.json`);
       const jsonSchema = await readFile(fullPath, 'utf-8');
+      /**
+       * @todo figure out if there's a way to patch json-schema-to-typescript to include typia compatible comments|tags based on JSON-schema format keywords
+       * @see https://typia.io/docs/validators/tags/
+       * */
       const tsInterface = await compile(
         cleanSchema(jsonSchema),
         jsonSchemaPath,

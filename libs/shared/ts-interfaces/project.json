@@ -3,9 +3,6 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ts-interfaces/src",
   "projectType": "library",
-  "namedInputs": {
-    "bundle": ["{projectRoot}/internals/*.ts"]
-  },
   "implicitDependencies": ["schemas"],
   "targets": {
     "build": {

@@ -3,9 +3,6 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/schemas/src",
   "projectType": "library",
-  "namedInputs": {
-    "bundle": ["{projectRoot}/internals/*.{json,ts}"]
-  },
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -23,7 +20,6 @@
     },
     "bundle": {
       "executor": "nx:run-commands",
-      "inputs": ["bundle"],
       "outputs": ["{projectRoot}/src/lib/*.json"],
       "options": {
         "command": "npx ts-node libs/shared/schemas/internals/bundle.ts",
