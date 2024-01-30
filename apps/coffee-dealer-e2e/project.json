@@ -2,14 +2,37 @@
   "name": "coffee-dealer-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["coffee-dealer"],
+  "namedInputs": {
+    "coffee-dealer": [
+      {
+        "dependentTasksOutputFiles": "{workspaceRoot}/dist/apps/coffee-dealer/**/*.js",
+        "transitive": false
+      }
+    ]
+  },
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
+      "dependsOn": ["^build", "check-port"],
+      "inputs": ["^production", "coffee-dealer"],
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
         "jestConfig": "apps/coffee-dealer-e2e/jest.config.ts",
         "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true
+        },
+        "development": {}
+      }
+    },
+    "check-port": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "lsof -i:${PORT:-3000} -t"
       }
     },
     "lint": {
