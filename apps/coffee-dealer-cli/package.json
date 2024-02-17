@@ -1,0 +1,12 @@
+{
+  "bin": {
+    "coffee-dealer": "dist/main.js"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^3.0.2",
+    "@nestjs/common": "^10.0.2",
+    "@nx/webpack": "17.2.8",
+    "nest-commander": "^3.12.5",
+    "rxjs": "^7.8.0"
+  }
+}

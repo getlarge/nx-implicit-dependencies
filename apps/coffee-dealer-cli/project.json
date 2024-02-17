@@ -3,6 +3,14 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/coffee-dealer-cli/src",
   "projectType": "application",
+  "namedInputs": {
+    "coffee-dealer": [
+      {
+        "dependentTasksOutputFiles": "{workspaceRoot}/dist/apps/coffee-dealer/**/*.js",
+        "transitive": false
+      }
+    ]
+  },
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -22,19 +30,21 @@
         "production": {}
       }
     },
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
+    "run": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build", "check-port"],
+      "inputs": ["^production", "coffee-dealer"],
       "options": {
-        "buildTarget": "coffee-dealer-cli:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "coffee-dealer-cli:build:development"
-        },
-        "production": {
-          "buildTarget": "coffee-dealer-cli:build:production"
+        "command": "node dist/apps/coffee-dealer-cli/main.js call",
+        "env": {
+          "NODE_ENV": "development"
         }
+      }
+    },
+    "check-port": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "lsof -i:${PORT:-3000} -t"
       }
     },
     "lint": {

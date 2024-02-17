@@ -14,7 +14,7 @@
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
-      "dependsOn": ["^build", "check-port"],
+      "dependsOn": ["build", "check-port"],
       "inputs": ["^production", "coffee-dealer"],
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {

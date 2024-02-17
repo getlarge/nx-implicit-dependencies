@@ -2,10 +2,7 @@
   "name": "@getlarge/ts-interfaces",
   "version": "0.0.1",
   "dependencies": {
-    "tslib": "^2.3.0",
-    "@apidevtools/json-schema-ref-parser": "^11.1.0",
-    "json-schema-to-typescript": "^13.1.2",
-    "prettier": "^2.6.2"
+    "tslib": "^2.3.0"
   },
   "type": "commonjs",
   "main": "./src/index.js",
