@@ -25,7 +25,8 @@
         "main": "apps/coffee-dealer/src/main.ts",
         "tsConfig": "apps/coffee-dealer/tsconfig.app.json",
         "assets": ["apps/coffee-dealer/src/assets"],
-        "webpackConfig": "apps/coffee-dealer/webpack.config.js"
+        "webpackConfig": "apps/coffee-dealer/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
